@@ -1,4 +1,5 @@
-Project 0 
+Project 0
+Due Wed Feb 13. Should be done by Tuesday morning and finish presentation on or before Tuesday
 
 Bank Assignment
 
