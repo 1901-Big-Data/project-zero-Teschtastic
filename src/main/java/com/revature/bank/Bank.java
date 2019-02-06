@@ -6,37 +6,57 @@ public class Bank {
 	public static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
 		Map<String, String> users = new HashMap<String, String>();
-		int choice = 0;
+		
+		userChoice(scan, users);
+	}
+	
+	public static void userChoice(Scanner scan, Map<String, String> users) {
+		String choice = "";
 		
 		do {
 			mainMenu();
-			choice = scan.nextInt();
+			choice = scan.next();
 		
 			switch(choice) {
-				case 1:
+				case "1":
 					users.putAll(createUser(scan, users));
 					System.out.println(users);
 					break;
 			
-				case 2:
-					if(logIn())
+				case "2":
+					if(logIn(scan, users))
 						userMenu();
 					break;
 				
-				case 0:
+				case "0":
 					break;
 		
 				default:
 					System.out.println("Not a valid choice\n");
 					break;
 			}
-		} while(choice != 0);
-		
+		} while(!choice.equals("0"));
 		scan.close();
 	}
 	
-	public static boolean logIn() {
-		return true;
+	public static boolean logIn(Scanner scan, Map<String, String> users) {
+		String user = "", pass = "", garb = "";
+		
+		garb = scan.nextLine();
+		
+		System.out.print("Enter your username: ");
+		user = scan.nextLine();
+		System.out.print("Enter your password: ");
+		pass = scan.nextLine();
+		
+		if(user.equals(users.get(user))) {
+
+			return true;
+		}
+		
+		System.out.println("User does not exist");
+		user = null; pass = null; garb = null;
+		return false;
 	}
 	
 	public static Map<String, String> createUser(Scanner scan, Map<String, String> users) {
