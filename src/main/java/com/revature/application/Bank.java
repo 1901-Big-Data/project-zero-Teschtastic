@@ -4,30 +4,40 @@ import java.util.*;
 
 public class Bank {
 	public static void main(String[] args) {
-		userChoice();
+		mainMenuChoice();
+		return;
 	}
 	
-	public static void userChoice() {
-		Scanner scan = new Scanner(System.in);
+	public static void mainMenu() {
+		System.out.println("\nMain Menu\n");
+		System.out.println("1. Create new user");
+		System.out.println("2. Log In");
+		System.out.println("0. Exit\n");	
+	}
+	
+	public static void mainMenuChoice() {
+		Scanner mainScan = new Scanner(System.in);
 		Map<String, String> users = new HashMap<String, String>();
 		String choice = "";
 		
 		do {
 			mainMenu();
-			choice = scan.next();
+			choice = mainScan.next();
 		
 			switch(choice) {
 				case "1":
-					users.putAll(createUser(scan, users));
+					users.putAll(createUser(mainScan, users));
 					System.out.println(users);
 					break;
 			
 				case "2":
-					if(logIn(scan, users))
-						userMenu();
+					if(logIn(mainScan, users)) {
+						userMenuChoice();
+					}
 					break;
 				
 				case "0":
+					System.out.println("Exiting program.\nHave a nice day!");
 					break;
 		
 				default:
@@ -35,27 +45,7 @@ public class Bank {
 					break;
 			}
 		} while(!choice.equals("0"));
-		scan.close();
-	}
-	
-	public static boolean logIn(Scanner scan, Map<String, String> users) {
-		String user = "", pass = "", garb = "";
-		
-		garb = scan.nextLine();
-		
-		System.out.print("Enter your username: ");
-		user = scan.nextLine();
-		System.out.print("Enter your password: ");
-		pass = scan.nextLine();
-		
-		if(user.equals(users.get(user))) {
-
-			return true;
-		}
-		
-		System.out.println("User does not exist");
-		user = null; pass = null; garb = null;
-		return false;
+		mainScan.close();
 	}
 	
 	public static Map<String, String> createUser(Scanner scan, Map<String, String> users) {
@@ -78,12 +68,27 @@ public class Bank {
 		
 		return users;
 	}
-	
-	public static void mainMenu() {
-		System.out.println("\nMain Menu\n");
-		System.out.println("1. Create new user");
-		System.out.println("2. Log In");
-		System.out.println("0. Exit\n");	
+
+	public static boolean logIn(Scanner scan, Map<String, String> users) {
+		String user = "", pass = "", garb = "";
+		
+		garb = scan.nextLine();
+		
+		System.out.print("Enter your username: ");
+		user = scan.nextLine();
+		System.out.print("Enter your password: ");
+		pass = scan.nextLine();
+		
+		if(users.containsKey(user) && users.containsValue(pass)) {
+			return true;
+		} else if (users.containsKey(user) && !users.containsValue(pass)) {
+			System.out.println("Incorrect password");
+			return false;
+		}
+		
+		System.out.println("User does not exist");
+		user = null; pass = null; garb = null;
+		return false;
 	}
 	
 	public static void userMenu() {
@@ -93,5 +98,43 @@ public class Bank {
 		System.out.println("3. Withdraw from account");
 		System.out.println("4. Delete account");
 		System.out.println("0. Log out\n");
+	}
+	
+	private static void userMenuChoice() {
+		Scanner userScan = new Scanner(System.in);
+		String userChoice = "";
+		
+		do {
+			userMenu();
+			userChoice = userScan.next();
+		
+			switch(userChoice) {
+				case "1":
+					System.out.println("Account balance not implemented");
+					break;
+			
+				case "2":
+					System.out.println("Depositing not implemented");
+					break;
+					
+				case "3":
+					System.out.println("Withdrawing not implemented");
+					break;
+					
+				case "4":
+					System.out.println("Deleting account not implemented");
+					break;
+				
+				case "0":
+					System.out.println("Logging out.\n");
+					break;
+		
+				default:
+					System.out.println("Not a valid choice\n");
+					break;
+			}
+		} while(!userChoice.equals("0"));
+		userScan.close();
+		return;
 	}
 }
