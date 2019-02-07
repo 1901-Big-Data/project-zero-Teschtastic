@@ -1,16 +1,15 @@
-package com.revature.bank;
+package com.revature.application;
 
 import java.util.*;
 
 public class Bank {
 	public static void main(String[] args) {
-		Scanner scan = new Scanner(System.in);
-		Map<String, String> users = new HashMap<String, String>();
-		
-		userChoice(scan, users);
+		userChoice();
 	}
 	
-	public static void userChoice(Scanner scan, Map<String, String> users) {
+	public static void userChoice() {
+		Scanner scan = new Scanner(System.in);
+		Map<String, String> users = new HashMap<String, String>();
 		String choice = "";
 		
 		do {
