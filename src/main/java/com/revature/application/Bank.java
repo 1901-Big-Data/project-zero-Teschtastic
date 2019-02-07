@@ -4,7 +4,12 @@ import java.util.*;
 
 public class Bank {
 	public static void main(String[] args) {
-		mainMenuChoice();
+		Scanner mainScan = new Scanner(System.in), userScan = new Scanner(System.in);
+		Map<String, String> users = new HashMap<String, String>();
+		String mainChoice = "", userChoice = "";
+		mainMenuChoice(users, mainChoice, userChoice, mainScan, userScan);
+		mainScan.close();
+		userScan.close();
 		return;
 	}
 	
@@ -15,16 +20,13 @@ public class Bank {
 		System.out.println("0. Exit\n");	
 	}
 	
-	public static void mainMenuChoice() {
-		Scanner mainScan = new Scanner(System.in);
-		Map<String, String> users = new HashMap<String, String>();
-		String choice = "";
+	public static void mainMenuChoice(Map<String, String> users, String mainChoice, String userChoice, Scanner mainScan, Scanner userScan) {
 		
 		do {
 			mainMenu();
-			choice = mainScan.next();
+			mainChoice = mainScan.next();
 		
-			switch(choice) {
+			switch(mainChoice) {
 				case "1":
 					users.putAll(createUser(mainScan, users));
 					System.out.println(users);
@@ -32,7 +34,7 @@ public class Bank {
 			
 				case "2":
 					if(logIn(mainScan, users)) {
-						userMenuChoice();
+						userMenuChoice(users, userChoice, userScan);
 					}
 					break;
 				
@@ -44,8 +46,7 @@ public class Bank {
 					System.out.println("Not a valid choice\n");
 					break;
 			}
-		} while(!choice.equals("0"));
-		mainScan.close();
+		} while(!mainChoice.equals("0"));
 	}
 	
 	public static Map<String, String> createUser(Scanner scan, Map<String, String> users) {
@@ -100,9 +101,7 @@ public class Bank {
 		System.out.println("0. Log out\n");
 	}
 	
-	private static void userMenuChoice() {
-		Scanner userScan = new Scanner(System.in);
-		String userChoice = "";
+	private static void userMenuChoice(Map<String, String> users, String userChoice, Scanner userScan) {
 		
 		do {
 			userMenu();
@@ -134,7 +133,5 @@ public class Bank {
 					break;
 			}
 		} while(!userChoice.equals("0"));
-		userScan.close();
-		return;
 	}
 }
