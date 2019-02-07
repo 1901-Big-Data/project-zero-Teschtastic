@@ -4,12 +4,17 @@ import java.util.*;
 
 public class Bank {
 	public static void main(String[] args) {
-		Scanner mainScan = new Scanner(System.in), userScan = new Scanner(System.in);
+		Scanner mainScan = new Scanner(System.in), userScan = new Scanner(System.in), delUser = new Scanner(System.in);
 		Map<String, String> users = new HashMap<String, String>();
 		String mainChoice = "", userChoice = "";
-		mainMenuChoice(users, mainChoice, userChoice, mainScan, userScan);
+		
+		System.out.println("Welcome to revature Banking.");
+		
+		mainMenuChoice(users, mainChoice, userChoice, mainScan, userScan, delUser);
+		
 		mainScan.close();
 		userScan.close();
+		delUser.close();
 		return;
 	}
 	
@@ -20,7 +25,7 @@ public class Bank {
 		System.out.println("0. Exit\n");	
 	}
 	
-	public static void mainMenuChoice(Map<String, String> users, String mainChoice, String userChoice, Scanner mainScan, Scanner userScan) {
+	public static void mainMenuChoice(Map<String, String> users, String mainChoice, String userChoice, Scanner mainScan, Scanner userScan, Scanner delUser) {
 		
 		do {
 			mainMenu();
@@ -34,7 +39,7 @@ public class Bank {
 			
 				case "2":
 					if(logIn(mainScan, users)) {
-						userMenuChoice(users, userChoice, userScan);
+						userMenuChoice(users, userChoice, userScan, delUser);
 					}
 					break;
 				
@@ -50,35 +55,30 @@ public class Bank {
 	}
 	
 	public static Map<String, String> createUser(Scanner scan, Map<String, String> users) {
-		String username = "", passwordI = "", passwordII = "", garb = "";
-		
-		garb = scan.nextLine();
+		String username = "", passwordI = "", passwordII = "";
 		System.out.print("Enter your username: ");
-		username = scan.nextLine();
+		username = scan.next();
 		
 		do {
 			System.out.print("Enter your password: ");
-			passwordI = scan.nextLine();
+			passwordI = scan.next();
 			System.out.print("Re-Enter your password: ");
-			passwordII = scan.nextLine();
+			passwordII = scan.next();
 		} while(!passwordI.equals(passwordII));
 		
 		users.put(username, passwordI);
-	
-		garb = null; username = null; passwordI = null; passwordII = null;
+		username = null; passwordI = null; passwordII = null;
 		
 		return users;
 	}
 
 	public static boolean logIn(Scanner scan, Map<String, String> users) {
-		String user = "", pass = "", garb = "";
-		
-		garb = scan.nextLine();
+		String user = "", pass = "";
 		
 		System.out.print("Enter your username: ");
-		user = scan.nextLine();
+		user = scan.next();
 		System.out.print("Enter your password: ");
-		pass = scan.nextLine();
+		pass = scan.next();
 		
 		if(users.containsKey(user) && users.containsValue(pass)) {
 			return true;
@@ -88,7 +88,7 @@ public class Bank {
 		}
 		
 		System.out.println("User does not exist");
-		user = null; pass = null; garb = null;
+		user = null; pass = null;
 		return false;
 	}
 	
@@ -101,7 +101,7 @@ public class Bank {
 		System.out.println("0. Log out\n");
 	}
 	
-	private static void userMenuChoice(Map<String, String> users, String userChoice, Scanner userScan) {
+	private static void userMenuChoice(Map<String, String> users, String userChoice, Scanner userScan, Scanner delUser) {
 		
 		do {
 			userMenu();
@@ -121,10 +121,10 @@ public class Bank {
 					break;
 					
 				case "4":
-					System.out.println("Deleting account not implemented");
+					if(deleteUser(users, delUser))
+						return;
 					break;
-				
-				case "0":
+			case "0":
 					System.out.println("Logging out.\n");
 					break;
 		
@@ -133,5 +133,30 @@ public class Bank {
 					break;
 			}
 		} while(!userChoice.equals("0"));
+	}
+	
+	public static boolean deleteUser(Map<String, String> users, Scanner delUser) {
+		String del = "", userDel = "", passDel = "";
+		System.out.println("Confirmation\nDo you want to delete account? (y/n)");
+		
+		del = delUser.next().toLowerCase();
+		
+		if(del.equals("y")) {
+			
+			System.out.print("Enter your username: ");
+			userDel = delUser.next();
+			System.out.print("Enter your password: ");
+			passDel = delUser.next();
+			
+			if(users.containsKey(userDel) && users.containsValue(passDel)) {
+				System.out.println(users.toString() + " will now be deleted.");
+				users.remove(userDel, passDel);
+				return true;
+			} else if (users.containsKey(userDel) && !users.containsValue(passDel)) {
+				System.out.println("Incorrect password");
+				return false;
+			}
+		}
+		return false;
 	}
 }
