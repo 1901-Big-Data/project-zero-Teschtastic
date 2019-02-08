@@ -39,13 +39,15 @@ public class Bank {
 		
 			switch(mainChoice) {
 				case "1":
-					users = userService.createUser(scan).get();
-					System.out.println(users);
+					if(userService.createUser(scan).get())
+						System.out.println("New user has been created.");
+					else
+						System.out.println("User could not be created.");
 					break;
 			
 				case "2":
-					users = userService.login(users, scan).get();
-					userMenuChoice(users, userChoice, userScan, userService);
+					users = userService.login(scan).get();
+					userMenuChoice(users, userChoice, userScan, userService, scan);
 					break;
 				
 				case "0":
@@ -68,7 +70,7 @@ public class Bank {
 		System.out.println("0. Log out\n");
 	}
 	
-	private static void userMenuChoice(User users, String userChoice, Scanner userScan, UserService userService) {
+	private static void userMenuChoice(User users, String userChoice, Scanner userScan, UserService userService, Scanner scan) {
 		
 		do {
 			userMenu();
@@ -88,7 +90,10 @@ public class Bank {
 					break;
 					
 				case "4":
-					System.out.println("Deleting not implemented");
+					if(userService.deleteUser(scan).get()) {
+						System.out.println("User has been deleted.");
+						userChoice = "0";
+						}
 					break;
 			case "0":
 					System.out.println("Logging out.\n");
@@ -100,29 +105,4 @@ public class Bank {
 			}
 		} while(!userChoice.equals("0"));
 	}
-//	
-//	public static boolean deleteUser(Map<String, String> users, Scanner delUser) {
-//		String del = "", userDel = "", passDel = "";
-//		System.out.println("Confirmation\nDo you want to delete account? (y/n)");
-//		
-//		del = delUser.next().toLowerCase();
-//		
-//		if(del.equals("y")) {
-//			
-//			System.out.print("Enter your username: ");
-//			userDel = delUser.next();
-//			System.out.print("Enter your password: ");
-//			passDel = delUser.next();
-//			
-//			if(users.containsKey(userDel) && users.containsValue(passDel)) {
-//				System.out.println(users.toString() + " will now be deleted.");
-//				users.remove(userDel, passDel);
-//				return true;
-//			} else if (users.containsKey(userDel) && !users.containsValue(passDel)) {
-//				System.out.println("Incorrect password");
-//				return false;
-//			}
-//		}
-//		return false;
-//	}
 }

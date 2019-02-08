@@ -11,14 +11,14 @@ public class User implements Serializable {
 	private Integer id;
 	private String username;
 	transient private String password;
-	private Boolean isAdmin;
+	private Integer isAdmin;
 	
 	
 	public User() {
 		super();
 	}
 
-	public User(Integer id, String username, String password, Boolean isAdmin) {
+	public User(Integer id, String username, String password, Integer isAdmin) {
 		super();
 		this.id = id;
 		this.username = username;
@@ -44,10 +44,10 @@ public class User implements Serializable {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public Boolean getIsAdmin() {
+	public Integer getIsAdmin() {
 		return isAdmin;
 	}
-	public void setIsAdmin(Boolean isAdmin) {
+	public void setIsAdmin(Integer isAdmin) {
 		this.isAdmin = isAdmin;
 	}
 	public static long getSerialversionuid() {

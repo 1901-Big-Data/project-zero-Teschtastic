@@ -22,11 +22,15 @@ public class UserService {
 		return userService;
 	}
 	
-	public Optional<User> login(User user, Scanner scan) throws Exception {
-		return userDao.login(user, scan);
+	public Optional<User> login(Scanner scan) throws Exception {
+		return userDao.login(scan);
 	}
 	
-	public Optional<User> createUser(Scanner scan){
+	public Optional<Boolean> createUser(Scanner scan) {
 		return userDao.createUser(scan);
+	}
+	
+	public Optional<Boolean> deleteUser(Scanner scan) {
+		return userDao.deleteUser(scan);
 	}
 }
