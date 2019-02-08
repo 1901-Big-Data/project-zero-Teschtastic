@@ -1,6 +1,10 @@
 package com.revature.dao;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Types;
+//import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.Scanner;
 
@@ -22,43 +26,54 @@ public class UserOracle implements UserDao {
 	}
 
 	@Override
-	public Optional<User> createUser(User user) {
+	public Optional<User> createUser(Scanner scan) {
 		Connection con = ConnectionUtil.getConnection();
-		Scanner scan = new Scanner(System.in);
 		
 		if(con == null) {
-			scan.close();
 			return Optional.empty();
 		}
 		
-		String username = "", passwordI = "", passwordII = "";
-		System.out.print("Enter your username: ");
-		username = scan.next();
+		try {
+			String username = "", passwordI = "", passwordII = "";
+			System.out.print("Enter your username: ");
+			username = scan.next();
 		
-		do {
-			System.out.print("Enter your password: ");
-			passwordI = scan.next();
-			System.out.print("Re-Enter your password: ");
-			passwordII = scan.next();
-		} while(!passwordI.equals(passwordII));
+			do {
+				System.out.print("Enter your password: ");
+				passwordI = scan.next();
+				System.out.print("Re-Enter your password: ");
+				passwordII = scan.next();
+			} while(!passwordI.equals(passwordII));
+		
+			String sql = "call addUser(?,?,?,?)";
+			CallableStatement cs = con.prepareCall(sql);
+			cs.setString(1, username);
+			cs.setString(2, passwordI);
+			cs.setInt(3, 0);
+			cs.registerOutParameter(4, Types.INTEGER);
+			cs.execute();
+			
+			Integer id = cs.getInt(4);
+			
+			User user = new User(id,username, passwordI, false);
 
-		System.out.println(username + " " + passwordI);
-		user.setUsername(username);
-		user.setPassword(passwordI);
+			System.out.println(user.getUsername() + " has been created.");
+			return Optional.of(user);
+			
+		} catch (SQLException e) {
+			return Optional.empty();
 		
-		username = null; passwordI = null; passwordII = null;
-		scan.close();
-		
-		return Optional.of(user);
+		}
 	}
 
+	// if user doesn't exist throw exception to user
+	// empty optional for sqlexception
+	// 
 	@Override
-	public Optional<Boolean> login(User user) throws Exception {
+	public Optional<User> login(User user, Scanner scan) throws Exception {
 		Connection con = ConnectionUtil.getConnection();
-		Scanner scan = new Scanner(System.in);
 		
 		if(con == null) {
-			scan.close();
 			return Optional.empty();
 		}
 		
@@ -70,18 +85,21 @@ public class UserOracle implements UserDao {
 		pass = scan.next();
 		
 		if(user.getUsername().equals(username) && user.getPassword().equals(pass)) {
-			scan.close();
-			return Optional.of(true);
-		} else if (user.getUsername().equals(username) && !user.getPassword().equals(pass)) {
-			System.out.println("Incorrect password");
-			scan.close();
-			return Optional.of(false);
+				
+				return Optional.of(user);
+		} else {
+			System.out.println("Could not log in.");
+			return Optional.empty();
 		}
 		
-		System.out.println("User does not exist");
-		user = null; pass = null;
-		scan.close();
-		return Optional.of(false);
+		//user = null; pass = null;
+		//return Optional.empty();
+	}
+
+	@Override
+	public Optional<Boolean> deleteUser(User user, Scanner scan) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

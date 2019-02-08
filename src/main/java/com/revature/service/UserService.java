@@ -1,6 +1,7 @@
 package com.revature.service;
 
 import java.util.Optional;
+import java.util.Scanner;
 
 import com.revature.dao.UserDao;
 import com.revature.dao.UserOracle;
@@ -21,11 +22,11 @@ public class UserService {
 		return userService;
 	}
 	
-	public Optional<Boolean> login(User user) throws Exception {
-		return null;
+	public Optional<User> login(User user, Scanner scan) throws Exception {
+		return userDao.login(user, scan);
 	}
 	
-	public Optional<User> createUser(User user){
-		return userDao.createUser(user);
+	public Optional<User> createUser(Scanner scan){
+		return userDao.createUser(scan);
 	}
 }

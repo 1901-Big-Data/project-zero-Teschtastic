@@ -1,10 +1,12 @@
 package com.revature.dao;
 
 import java.util.Optional;
+import java.util.Scanner;
 
 import com.revature.model.User;
 
 public interface UserDao {
-	Optional<Boolean> login(User user) throws Exception;
-	Optional<User> createUser(User user);
+	Optional<User> login(User user, Scanner scan) throws Exception;
+	Optional<Boolean> deleteUser(User user, Scanner scan);
+	Optional<User> createUser(Scanner scan);
 }
