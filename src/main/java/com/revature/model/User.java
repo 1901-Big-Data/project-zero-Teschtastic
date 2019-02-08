@@ -2,7 +2,7 @@ package com.revature.model;
 
 import java.io.Serializable;
 
-public class Users implements Serializable {
+public class User implements Serializable {
 	
 	/**
 	 * 
@@ -12,13 +12,13 @@ public class Users implements Serializable {
 	transient private String password;
 	private Double balance;
 	
-	public Users(String username, String password, Double balance) {
+	public User(String username, String password, Double balance) {
 		super();
 		this.username = username;
 		this.password = password;
 		this.balance = balance;
 	}
-	public Users() {
+	public User() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -60,7 +60,7 @@ public class Users implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Users other = (Users) obj;
+		User other = (User) obj;
 		if (balance == null) {
 			if (other.balance != null)
 				return false;
