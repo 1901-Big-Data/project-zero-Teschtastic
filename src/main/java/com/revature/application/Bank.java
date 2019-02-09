@@ -63,7 +63,7 @@ public class Bank {
 	
 	public static void userMenu() {
 		System.out.println("\nUser Menu\n");
-		System.out.println("1. View account balance");
+		System.out.println("1. View account");
 		System.out.println("2. Deposit into account");
 		System.out.println("3. Withdraw from account");
 		System.out.println("4. Delete account");

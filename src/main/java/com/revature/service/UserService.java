@@ -1,5 +1,6 @@
 package com.revature.service;
 
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.Scanner;
 
@@ -22,7 +23,7 @@ public class UserService {
 		return userService;
 	}
 	
-	public Optional<User> login(Scanner scan) throws Exception {
+	public Optional<User> login(Scanner scan) throws NoSuchElementException {
 		return userDao.login(scan);
 	}
 	

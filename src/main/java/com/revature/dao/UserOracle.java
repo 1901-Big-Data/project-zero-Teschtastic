@@ -24,8 +24,7 @@ public class UserOracle implements UserDao {
 		}
 		return instance;
 	}
-
-	// maybe make this return a boolean
+	
 	@Override
 	public Optional<Boolean> createUser(Scanner scan) {
 		Connection con = ConnectionUtil.getConnection();
@@ -61,9 +60,6 @@ public class UserOracle implements UserDao {
 		}
 	}
 
-	// if user doesn't exist throw exception to user
-	// empty optional for sqlexception
-	// 
 	@Override
 	public Optional<User> login(Scanner scan) throws NoSuchElementException {
 		Connection con = ConnectionUtil.getConnection();
@@ -96,7 +92,6 @@ public class UserOracle implements UserDao {
 			
 			try {
 				if (success == 0) {
-					//throw new NoSuchElementException("Invalid username / password combination");
 					System.out.println("Invalid username / password combination");
 				} else {
 					User user = new User(id, username, "", (admin > 0) ? 1 : 0);
