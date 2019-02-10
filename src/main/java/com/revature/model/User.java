@@ -8,10 +8,12 @@ public class User implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = -7889531090999421073L;
+	Account acc = new Account();
 	private Integer id;
 	private String username;
 	transient private String password;
 	private Integer isAdmin;
+	private Double bal;
 	
 	
 	public User() {

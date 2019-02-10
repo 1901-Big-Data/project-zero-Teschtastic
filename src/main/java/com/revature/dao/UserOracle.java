@@ -34,7 +34,7 @@ public class UserOracle implements UserDao {
 		}
 		
 		try {
-			String username = "", passwordI = "", passwordII = "";
+			String username = "", passwordI = "", passwordII = "", accType = "", startBal = "";
 			System.out.print("Enter your username: ");
 			username = scan.next();
 		
@@ -44,13 +44,22 @@ public class UserOracle implements UserDao {
 				System.out.print("Re-Enter your password: ");
 				passwordII = scan.next();
 			} while(!passwordI.equals(passwordII));
+			
+			System.out.print("Enter account type: ");
+			accType = scan.next();
+			
+			System.out.print("Enter starting balance: ");
+			startBal = scan.next();
 		
-			String sql = "call addUser(?,?,?,?)";
+			String sql = "call addUser(?,?,?,?,?,?,?)";
 			CallableStatement cs = con.prepareCall(sql);
 			cs.setString(1, username);
 			cs.setString(2, passwordI);
-			cs.setInt(3, 0);
-			cs.registerOutParameter(4, Types.INTEGER);
+			cs.setInt(3, Integer.parseInt(accType));
+			cs.setInt(4, Integer.parseInt(startBal));
+			cs.setInt(5, 0);
+			cs.registerOutParameter(6, Types.INTEGER);
+			cs.registerOutParameter(7, Types.INTEGER);
 			cs.execute();
 			
 			return Optional.of(true);
@@ -77,13 +86,16 @@ public class UserOracle implements UserDao {
 		
 		
 		try {
-			String sql = "call login(?,?,?,?,?)";
+			String sql = "call login(?,?,?,?,?,?,?,?)";
 			CallableStatement cs = con.prepareCall(sql);
 			cs.setString(1, username);
 			cs.setString(2, pass);
 			cs.registerOutParameter(3, Types.INTEGER);
 			cs.registerOutParameter(4, Types.INTEGER);
 			cs.registerOutParameter(5, Types.INTEGER);
+			cs.registerOutParameter(6, Types.INTEGER);
+			cs.registerOutParameter(7, Types.INTEGER);
+			cs.registerOutParameter(8, Types.INTEGER);
 			cs.execute();
 			
 			Integer success = cs.getInt(3);

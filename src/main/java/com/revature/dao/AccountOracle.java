@@ -27,9 +27,10 @@ public class AccountOracle implements AccountDao {
 	}
 
 	@Override
-	public Optional<Double> viewAccount(Account account) {
-		// TODO Auto-generated method stub
-		return null;
+	public Optional<Double> viewAccount(User user, Account account) {
+		String username = user.getUsername();
+		account.setAccountUsername(username);
+		return Optional.of(account.getBalance());
 	}
 
 	@Override

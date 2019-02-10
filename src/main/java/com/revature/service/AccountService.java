@@ -23,19 +23,19 @@ public class AccountService {
 		return service;
 	}
 	
-	Optional<Account> createAccount(Scanner scan, User user) {
+	public Optional<Account> createAccount(Scanner scan, User user) {
 		return accountDao.createAccount(scan, user);
 	}
 	
-	Optional<Double> viewAccount(Account account) {
-		return accountDao.viewAccount(account);
+	public Optional<Double> viewAccount(User user, Account account) {
+		return accountDao.viewAccount(user, account);
 	}
 	
-	Optional<Boolean> depositInto(Account account) {
+	public Optional<Boolean> depositInto(Account account) {
 		return accountDao.depositInto(account);
 	}
 	
-	Optional<Boolean> withdrawFrom(Account account) {
+	public Optional<Boolean> withdrawFrom(Account account) {
 		return accountDao.withdrawFrom(account);
 	}
 }
