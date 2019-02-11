@@ -22,12 +22,16 @@ public class AccountService {
 		}
 		return service;
 	}
-	
-	public Optional<Account> createAccount(Scanner scan, User user) {
+
+	public Optional<Boolean> createAccount(Scanner scan, User user) {
 		return accountDao.createAccount(scan, user);
 	}
 	
-	public Optional<Boolean> viewAccount(User user, Account account, Scanner scan) {
+	public Optional<Boolean> deleteAccount(Scanner scan, User user) {
+		return accountDao.deleteAccount(scan, user);
+	}
+	
+	public Optional<Account> viewAccount(User user, Account account, Scanner scan) {
 		return accountDao.viewAccount(user, account, scan);
 	}
 	

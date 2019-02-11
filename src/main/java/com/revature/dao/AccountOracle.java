@@ -30,13 +30,48 @@ public class AccountOracle implements AccountDao {
 	}
 
 	@Override
-	public Optional<Account> createAccount(Scanner scan, User user) {
-		// TODO Auto-generated method stub
+	public Optional<Boolean> createAccount(Scanner scan, User user) {
+
+		System.out.print("Enter account type: ");
+		//accType = scan.next();
+		
+		System.out.print("Enter starting balance: ");
+		//startBal = scan.next();
 		return null;
 	}
 
 	@Override
-	public Optional<Boolean> viewAccount(User user, Account account, Scanner scan) {
+	public Optional<Boolean> deleteAccount(Scanner scan, User user) {
+		Connection con = ConnectionUtil.getConnection();
+		
+		if(con == null) {
+			return Optional.empty();
+		}
+		
+		String username = "", pass = "";
+		
+		System.out.print("Enter your username: ");
+		username = scan.next();
+		System.out.print("Enter your password: ");
+		pass = scan.next();
+		
+		try {
+		
+			String sql = "call deleteAccount(?,?)";
+			CallableStatement cs = con.prepareCall(sql);
+			cs.setString(1, username);
+			cs.setString(2, pass);
+			cs.execute();
+			
+			return Optional.of(true);
+		} catch (SQLException e) {
+			return Optional.of(false);
+		
+		}
+	}
+
+	@Override
+	public Optional<Account> viewAccount(User user, Account account, Scanner scan) {
 		Connection con = ConnectionUtil.getConnection();
 		
 		if(con == null) {
@@ -50,29 +85,28 @@ public class AccountOracle implements AccountDao {
 		
 		try {
 
-			log.error("Trying");
-			String sql = "call viewAccount(?,?,?)";
-			log.error("Still Trying");
+			//log.error("Trying");
+			String sql = "call viewBalance(?,?,?)";
+			//log.error("Still Trying");
 			CallableStatement cs = con.prepareCall(sql);
 			cs.setString(1, username);
-			cs.registerOutParameter(2, Types.INTEGER);
+			cs.registerOutParameter(2, Types.VARCHAR);
 			cs.registerOutParameter(3, Types.DOUBLE);
 			cs.execute();
-			log.error("continued tries");
+			//log.error("continued tries");
 			
-			//String type = cs.getString(2);
+			String type = cs.getString(2);
 			Double bal = cs.getDouble(3);
 			
-			//account.setAccountType(type);
+			account.setAccountType(type);
 			account.setBalance(bal);
-			log.error("Last try");
+			account.setAccountUsername(username);
+			//log.error("Last try");
 			
-			System.out.println("The account of " + username + "'s balance is: " + bal);
-			
-			return Optional.of(true);
+			return Optional.of(account);
 		} catch (SQLException e) {
 			log.error("Couldn't get balance " + e);
-			return Optional.of(false);
+			return Optional.empty();
 		
 		}
 	}

@@ -39,7 +39,8 @@ public class UserOracle implements UserDao {
 		}
 		
 		try {
-			String username = "", passwordI = "", passwordII = "", accType = "", startBal = "";
+			String username = "", passwordI = "", passwordII = "";
+			Boolean isAdmin = false;
 			System.out.print("Enter your username: ");
 			username = scan.next();
 		
@@ -49,22 +50,13 @@ public class UserOracle implements UserDao {
 				System.out.print("Re-Enter your password: ");
 				passwordII = scan.next();
 			} while(!passwordI.equals(passwordII));
-			
-			System.out.print("Enter account type: ");
-			accType = scan.next();
-			
-			System.out.print("Enter starting balance: ");
-			startBal = scan.next();
 		
-			String sql = "call addUser(?,?,?,?,?,?,?)";
+			String sql = "call addUser(?,?,?,?)";
 			CallableStatement cs = con.prepareCall(sql);
 			cs.setString(1, username);
 			cs.setString(2, passwordI);
-			cs.setInt(3, Integer.parseInt(accType));
-			cs.setDouble(4, Double.parseDouble(startBal));
-			cs.setInt(5, 0);
-			cs.registerOutParameter(6, Types.INTEGER);
-			cs.registerOutParameter(7, Types.INTEGER);
+			cs.setInt(3, (isAdmin) ? 1 : 0);
+			cs.registerOutParameter(4, Types.INTEGER);
 			cs.execute();
 			
 			return Optional.of(true);
@@ -93,29 +85,29 @@ public class UserOracle implements UserDao {
 		
 		try {
 
-			log.error("Trying");
+			//log.error("Trying");
 			String sql = "call login(?,?,?,?,?)";
-			log.error("still Trying");
+			//log.error("still Trying");
 			CallableStatement cs = con.prepareCall(sql);
-			log.error("continue Trying");
+			//log.error("continue Trying");
 			cs.setString(1, username);
-			log.error("all the tries1");
+			//log.error("all the tries1");
 			cs.setString(2, pass);
-			log.error("all the tries2");
+			//log.error("all the tries2");
 			cs.registerOutParameter(3, Types.INTEGER);
-			log.error("all the tries3");
+			//log.error("all the tries3");
 			cs.registerOutParameter(4, Types.INTEGER);
-			log.error("all the tries4");
+			//log.error("all the tries4");
 			cs.registerOutParameter(5, Types.INTEGER);
-			log.error("all the tries5");
+			//log.error("all the tries5");
 			cs.execute();
-			log.error("omg Trying");
+			//log.error("omg Trying");
 			
 			Integer success = cs.getInt(3);
 			Integer id = cs.getInt(4);
 			Integer admin = cs.getInt(5);
 
-			log.error("last try");
+			//log.error("last try");
 			try {
 				if (success == 0) {
 					System.out.println("Invalid username / password combination");
@@ -131,7 +123,6 @@ public class UserOracle implements UserDao {
 			return Optional.empty();
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return Optional.empty();
 		}

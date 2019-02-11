@@ -98,3 +98,17 @@ ORA-06512: at "MASTER.ADDUSER", line 10
 [ERROR] 2019-02-11 11:29:46.481 [main] AccountOracle - Still Trying
 [ERROR] 2019-02-11 11:29:46.519 [main] AccountOracle - Couldn't get balance java.sql.SQLException: ORA-06576: not a valid function or procedure name
 
+[ERROR] 2019-02-11 12:54:26.023 [main] UserOracle - Trying
+[ERROR] 2019-02-11 12:54:26.033 [main] UserOracle - still Trying
+[ERROR] 2019-02-11 12:54:26.034 [main] UserOracle - continue Trying
+[ERROR] 2019-02-11 12:54:26.034 [main] UserOracle - all the tries1
+[ERROR] 2019-02-11 12:54:26.035 [main] UserOracle - all the tries2
+[ERROR] 2019-02-11 12:54:26.035 [main] UserOracle - all the tries3
+[ERROR] 2019-02-11 12:54:26.036 [main] UserOracle - all the tries4
+[ERROR] 2019-02-11 12:54:26.036 [main] UserOracle - all the tries5
+[ERROR] 2019-02-11 12:54:26.047 [main] UserOracle - omg Trying
+[ERROR] 2019-02-11 12:54:26.048 [main] UserOracle - last try
+[ERROR] 2019-02-11 13:18:41.107 [main] AccountOracle - Trying
+[ERROR] 2019-02-11 13:18:41.121 [main] AccountOracle - Still Trying
+[ERROR] 2019-02-11 13:18:41.171 [main] AccountOracle - continued tries
+[ERROR] 2019-02-11 13:18:41.172 [main] AccountOracle - Last try
