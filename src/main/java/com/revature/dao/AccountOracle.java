@@ -31,13 +31,39 @@ public class AccountOracle implements AccountDao {
 
 	@Override
 	public Optional<Boolean> createAccount(Scanner scan, User user) {
-
-		System.out.print("Enter account type: ");
-		//accType = scan.next();
+		Connection con = ConnectionUtil.getConnection();
 		
-		System.out.print("Enter starting balance: ");
-		//startBal = scan.next();
-		return null;
+		if(con == null) {
+			return Optional.empty();
+		}
+		
+		String accType, startBal;
+		
+		//do {
+			System.out.print("Enter account type (savings or checking): ");
+			accType = scan.next();
+			accType = accType.toLowerCase();
+		//} while(!accType.equals("savings") || !accType.equals("checking"));
+		
+		do {
+			System.out.print("Enter starting balance: ");
+			startBal = scan.next();
+		} while(Double.parseDouble(startBal) < 0.0);
+		
+		try {
+			
+			String sql = "call addAccount(?,?,?,?)";
+			CallableStatement cs = con.prepareCall(sql);
+			cs.setString(1, user.getUsername());
+			cs.setDouble(2, Double.parseDouble(startBal));
+			cs.setString(3, accType);
+			cs.execute();
+			
+			return Optional.of(true);
+		} catch (SQLException e) {
+			return Optional.of(false);
+		
+		}
 	}
 
 	@Override

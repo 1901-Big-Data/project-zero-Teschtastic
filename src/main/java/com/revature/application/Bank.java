@@ -102,7 +102,10 @@ public class Bank {
 					break;
 					
 				case "4":
-					System.out.println("Creating account not implemented");
+					if (accountService.createAccount(scan, users).get())
+						System.out.println("Account has been created");
+					else
+						System.out.println("Account could not be created");
 					break;
 					
 				case "5":
