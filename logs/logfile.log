@@ -1,0 +1,100 @@
+[ERROR] 2019-02-11 11:01:03.067 [main] UserOracle - Why you do this?
+[ERROR] 2019-02-11 11:02:22.205 [main] UserOracle - Why you do this?
+[ERROR] 2019-02-11 11:02:54.399 [main] UserOracle - Why you do this?java.sql.SQLIntegrityConstraintViolationException: ORA-01400: cannot insert NULL into ("MASTER"."USERS"."IS_ADMIN")
+ORA-06512: at "MASTER.ADDUSER", line 5
+
+[ERROR] 2019-02-11 11:03:49.890 [main] UserOracle - Why you do this?java.sql.SQLIntegrityConstraintViolationException: ORA-00001: unique constraint (MASTER.SYS_C005238) violated
+ORA-06512: at "MASTER.ADDUSER", line 10
+
+[ERROR] 2019-02-11 11:09:50.542 [main] UserOracle - Trying
+[ERROR] 2019-02-11 11:09:50.560 [main] UserOracle - still Trying
+[ERROR] 2019-02-11 11:09:50.966 [main] UserOracle - continue Trying
+[ERROR] 2019-02-11 11:11:11.224 [main] UserOracle - Trying
+[ERROR] 2019-02-11 11:11:11.238 [main] UserOracle - still Trying
+[ERROR] 2019-02-11 11:11:11.501 [main] UserOracle - continue Trying
+[ERROR] 2019-02-11 11:11:11.502 [main] UserOracle - all the tries1
+[ERROR] 2019-02-11 11:11:11.502 [main] UserOracle - all the tries2
+[ERROR] 2019-02-11 11:11:11.546 [main] UserOracle - all the tries3
+[ERROR] 2019-02-11 11:11:11.547 [main] UserOracle - all the tries4
+[ERROR] 2019-02-11 11:11:11.547 [main] UserOracle - all the tries5
+[ERROR] 2019-02-11 11:11:11.548 [main] UserOracle - all the tries6
+[ERROR] 2019-02-11 11:11:11.548 [main] UserOracle - all the tries7
+[ERROR] 2019-02-11 11:11:11.549 [main] UserOracle - all the tries8
+[ERROR] 2019-02-11 11:14:43.203 [main] UserOracle - Trying
+[ERROR] 2019-02-11 11:14:43.217 [main] UserOracle - still Trying
+[ERROR] 2019-02-11 11:14:43.497 [main] UserOracle - continue Trying
+[ERROR] 2019-02-11 11:14:43.499 [main] UserOracle - all the tries1
+[ERROR] 2019-02-11 11:14:43.499 [main] UserOracle - all the tries2
+[ERROR] 2019-02-11 11:14:43.549 [main] UserOracle - all the tries3
+[ERROR] 2019-02-11 11:14:43.550 [main] UserOracle - all the tries4
+[ERROR] 2019-02-11 11:14:43.550 [main] UserOracle - all the tries5
+[ERROR] 2019-02-11 11:14:43.550 [main] UserOracle - all the tries6
+[ERROR] 2019-02-11 11:14:43.551 [main] UserOracle - all the tries7
+[ERROR] 2019-02-11 11:14:43.551 [main] UserOracle - all the tries8
+[ERROR] 2019-02-11 11:16:20.867 [main] UserOracle - Trying
+[ERROR] 2019-02-11 11:16:20.881 [main] UserOracle - still Trying
+[ERROR] 2019-02-11 11:16:21.135 [main] UserOracle - continue Trying
+[ERROR] 2019-02-11 11:16:21.135 [main] UserOracle - all the tries1
+[ERROR] 2019-02-11 11:16:21.136 [main] UserOracle - all the tries2
+[ERROR] 2019-02-11 11:16:21.181 [main] UserOracle - all the tries3
+[ERROR] 2019-02-11 11:16:21.181 [main] UserOracle - all the tries4
+[ERROR] 2019-02-11 11:16:21.182 [main] UserOracle - all the tries5
+[ERROR] 2019-02-11 11:16:21.182 [main] UserOracle - all the tries6
+[ERROR] 2019-02-11 11:16:21.182 [main] UserOracle - all the tries7
+[ERROR] 2019-02-11 11:16:21.183 [main] UserOracle - all the tries8
+[ERROR] 2019-02-11 11:23:12.284 [main] UserOracle - Trying
+[ERROR] 2019-02-11 11:23:12.300 [main] UserOracle - still Trying
+[ERROR] 2019-02-11 11:23:12.571 [main] UserOracle - continue Trying
+[ERROR] 2019-02-11 11:23:12.572 [main] UserOracle - all the tries1
+[ERROR] 2019-02-11 11:23:12.572 [main] UserOracle - all the tries2
+[ERROR] 2019-02-11 11:23:12.617 [main] UserOracle - all the tries3
+[ERROR] 2019-02-11 11:23:12.617 [main] UserOracle - all the tries4
+[ERROR] 2019-02-11 11:23:12.618 [main] UserOracle - all the tries5
+[ERROR] 2019-02-11 11:23:12.639 [main] UserOracle - omg Trying
+[ERROR] 2019-02-11 11:23:12.639 [main] UserOracle - last try
+[ERROR] 2019-02-11 11:23:21.639 [main] AccountOracle - Trying
+[ERROR] 2019-02-11 11:23:21.647 [main] AccountOracle - Still Trying
+[ERROR] 2019-02-11 11:23:21.682 [main] AccountOracle - Couldn't log in java.sql.SQLException: ORA-06576: not a valid function or procedure name
+
+[ERROR] 2019-02-11 11:24:34.454 [main] UserOracle - Trying
+[ERROR] 2019-02-11 11:24:34.471 [main] UserOracle - still Trying
+[ERROR] 2019-02-11 11:24:34.725 [main] UserOracle - continue Trying
+[ERROR] 2019-02-11 11:24:34.725 [main] UserOracle - all the tries1
+[ERROR] 2019-02-11 11:24:34.726 [main] UserOracle - all the tries2
+[ERROR] 2019-02-11 11:24:34.771 [main] UserOracle - all the tries3
+[ERROR] 2019-02-11 11:24:34.772 [main] UserOracle - all the tries4
+[ERROR] 2019-02-11 11:24:34.772 [main] UserOracle - all the tries5
+[ERROR] 2019-02-11 11:24:34.796 [main] UserOracle - omg Trying
+[ERROR] 2019-02-11 11:24:34.797 [main] UserOracle - last try
+[ERROR] 2019-02-11 11:24:36.162 [main] AccountOracle - Trying
+[ERROR] 2019-02-11 11:24:36.162 [main] AccountOracle - Still Trying
+[ERROR] 2019-02-11 11:24:36.195 [main] AccountOracle - Couldn't get balance java.sql.SQLException: ORA-06576: not a valid function or procedure name
+
+[ERROR] 2019-02-11 11:25:04.449 [main] UserOracle - Trying
+[ERROR] 2019-02-11 11:25:04.464 [main] UserOracle - still Trying
+[ERROR] 2019-02-11 11:25:04.705 [main] UserOracle - continue Trying
+[ERROR] 2019-02-11 11:25:04.706 [main] UserOracle - all the tries1
+[ERROR] 2019-02-11 11:25:04.706 [main] UserOracle - all the tries2
+[ERROR] 2019-02-11 11:25:04.752 [main] UserOracle - all the tries3
+[ERROR] 2019-02-11 11:25:04.752 [main] UserOracle - all the tries4
+[ERROR] 2019-02-11 11:25:04.752 [main] UserOracle - all the tries5
+[ERROR] 2019-02-11 11:25:04.768 [main] UserOracle - omg Trying
+[ERROR] 2019-02-11 11:25:04.769 [main] UserOracle - last try
+[ERROR] 2019-02-11 11:25:05.926 [main] AccountOracle - Trying
+[ERROR] 2019-02-11 11:25:05.927 [main] AccountOracle - Still Trying
+[ERROR] 2019-02-11 11:25:05.971 [main] AccountOracle - Couldn't get balance java.sql.SQLException: ORA-06576: not a valid function or procedure name
+
+[ERROR] 2019-02-11 11:29:44.654 [main] UserOracle - Trying
+[ERROR] 2019-02-11 11:29:44.688 [main] UserOracle - still Trying
+[ERROR] 2019-02-11 11:29:44.937 [main] UserOracle - continue Trying
+[ERROR] 2019-02-11 11:29:44.938 [main] UserOracle - all the tries1
+[ERROR] 2019-02-11 11:29:44.938 [main] UserOracle - all the tries2
+[ERROR] 2019-02-11 11:29:44.987 [main] UserOracle - all the tries3
+[ERROR] 2019-02-11 11:29:44.987 [main] UserOracle - all the tries4
+[ERROR] 2019-02-11 11:29:44.988 [main] UserOracle - all the tries5
+[ERROR] 2019-02-11 11:29:45.010 [main] UserOracle - omg Trying
+[ERROR] 2019-02-11 11:29:45.013 [main] UserOracle - last try
+[ERROR] 2019-02-11 11:29:46.481 [main] AccountOracle - Trying
+[ERROR] 2019-02-11 11:29:46.481 [main] AccountOracle - Still Trying
+[ERROR] 2019-02-11 11:29:46.519 [main] AccountOracle - Couldn't get balance java.sql.SQLException: ORA-06576: not a valid function or procedure name
+

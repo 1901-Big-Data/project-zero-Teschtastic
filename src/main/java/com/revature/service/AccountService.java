@@ -27,8 +27,8 @@ public class AccountService {
 		return accountDao.createAccount(scan, user);
 	}
 	
-	public Optional<Double> viewAccount(User user, Account account) {
-		return accountDao.viewAccount(user, account);
+	public Optional<Boolean> viewAccount(User user, Account account, Scanner scan) {
+		return accountDao.viewAccount(user, account, scan);
 	}
 	
 	public Optional<Boolean> depositInto(Account account) {

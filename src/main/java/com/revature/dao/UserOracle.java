@@ -8,11 +8,15 @@ import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.Scanner;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.revature.util.ConnectionUtil;
 import com.revature.model.User;
 
 public class UserOracle implements UserDao {
 	private static UserOracle instance;
+	private static final Logger log = LogManager.getLogger(UserOracle.class);
 	
 	private UserOracle() {
 		
@@ -30,6 +34,7 @@ public class UserOracle implements UserDao {
 		Connection con = ConnectionUtil.getConnection();
 		
 		if(con == null) {
+			log.error("Couldn't connect.");
 			return Optional.empty();
 		}
 		
@@ -56,7 +61,7 @@ public class UserOracle implements UserDao {
 			cs.setString(1, username);
 			cs.setString(2, passwordI);
 			cs.setInt(3, Integer.parseInt(accType));
-			cs.setInt(4, Integer.parseInt(startBal));
+			cs.setDouble(4, Double.parseDouble(startBal));
 			cs.setInt(5, 0);
 			cs.registerOutParameter(6, Types.INTEGER);
 			cs.registerOutParameter(7, Types.INTEGER);
@@ -64,6 +69,7 @@ public class UserOracle implements UserDao {
 			
 			return Optional.of(true);
 		} catch (SQLException e) {
+			log.error("Why you do this?" + e);
 			return Optional.of(false);
 		
 		}
@@ -86,22 +92,30 @@ public class UserOracle implements UserDao {
 		
 		
 		try {
-			String sql = "call login(?,?,?,?,?,?,?,?)";
+
+			log.error("Trying");
+			String sql = "call login(?,?,?,?,?)";
+			log.error("still Trying");
 			CallableStatement cs = con.prepareCall(sql);
+			log.error("continue Trying");
 			cs.setString(1, username);
+			log.error("all the tries1");
 			cs.setString(2, pass);
+			log.error("all the tries2");
 			cs.registerOutParameter(3, Types.INTEGER);
+			log.error("all the tries3");
 			cs.registerOutParameter(4, Types.INTEGER);
+			log.error("all the tries4");
 			cs.registerOutParameter(5, Types.INTEGER);
-			cs.registerOutParameter(6, Types.INTEGER);
-			cs.registerOutParameter(7, Types.INTEGER);
-			cs.registerOutParameter(8, Types.INTEGER);
+			log.error("all the tries5");
 			cs.execute();
+			log.error("omg Trying");
 			
 			Integer success = cs.getInt(3);
 			Integer id = cs.getInt(4);
 			Integer admin = cs.getInt(5);
-			
+
+			log.error("last try");
 			try {
 				if (success == 0) {
 					System.out.println("Invalid username / password combination");
@@ -125,7 +139,7 @@ public class UserOracle implements UserDao {
 
 	@Override
 	public Optional<Boolean> deleteUser(Scanner scan) {
-Connection con = ConnectionUtil.getConnection();
+		Connection con = ConnectionUtil.getConnection();
 		
 		if(con == null) {
 			return Optional.empty();

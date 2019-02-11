@@ -86,7 +86,7 @@ public class Bank {
 				case "1":
 					System.out.println("The account balance for: " 
 									+ users.getUsername() + " is "
-									+ accountService.viewAccount(users, accounts).get());
+									+ accountService.viewAccount(users, accounts, scan).get());
 					break;
 			
 				case "2":
