@@ -159,3 +159,18 @@ ORA-06512: at "MASTER.ADDACCOUNT", line 4
 [ERROR] 2019-02-12 13:49:23.197 [main] UserOracle - Database Error
 [ERROR] 2019-02-12 13:50:29.880 [main] UserOracle - Database Errorjava.sql.SQLException: Invalid column name
 [ERROR] 2019-02-12 13:52:16.306 [main] UserOracle - Database Errorjava.sql.SQLException: ResultSet.next was not called
+[ERROR] 2019-02-12 16:12:30.262 [main] AccountOracle - Database Error
+[ERROR] 2019-02-12 16:13:23.341 [main] AccountOracle - Database Errorjava.sql.SQLSyntaxErrorException: ORA-00920: invalid relational operator
+
+[ERROR] 2019-02-12 16:13:54.590 [main] AccountOracle - Database Errorjava.sql.SQLSyntaxErrorException: ORA-00920: invalid relational operator
+
+[ERROR] 2019-02-12 16:16:18.726 [main] AccountOracle - Database Errorjava.sql.SQLSyntaxErrorException: ORA-00920: invalid relational operator
+
+[ERROR] 2019-02-12 16:17:11.544 [main] AccountOracle - Database Errorjava.sql.SQLSyntaxErrorException: ORA-00920: invalid relational operator
+
+[ERROR] 2019-02-12 16:18:13.185 [main] AccountOracle - Database Errorjava.sql.SQLSyntaxErrorException: ORA-00920: invalid relational operator
+
+[ERROR] 2019-02-12 16:19:29.199 [main] AccountOracle - Database Errorjava.sql.SQLSyntaxErrorException: ORA-00920: invalid relational operator
+
+[ERROR] 2019-02-12 16:19:59.987 [main] AccountOracle - sql error
+[ERROR] 2019-02-12 16:19:59.997 [main] AccountOracle - account error700.0

@@ -148,6 +148,9 @@ public class AccountOracle implements AccountDao {
 		System.out.print("Enter amount to deposit: ");
 		bal = scan.nextDouble();
 		
+		if(bal < 0.0)
+			bal = bal * -1;
+		
 		try {
 			
 				String sql = "call changeBalance(?,?,?)";
@@ -174,7 +177,7 @@ Connection con = ConnectionUtil.getConnection();
 		}
 		
 		String username = "", id = "";
-		Double bal;
+		Double bal, bal1;
 		
 		System.out.print("Enter your username: ");
 		username = scan.next();
@@ -185,17 +188,32 @@ Connection con = ConnectionUtil.getConnection();
 		bal = bal * -1;
 		
 		try {
+			String sql1 = "select account_bal from accounts where acc_user = ? and account_id = ?";
+			PreparedStatement ps = con.prepareStatement(sql1);
+			ps.setString(1, username);
+			ps.setInt(2, Integer.parseInt(id));
+			ResultSet rs = ps.executeQuery();
+
+			//log.error("sql error");
+			rs.next();
+			bal1 = rs.getDouble("account_bal");
 			
+
+			//log.error("account error" + bal1);
+			if(Double.compare(bal1, bal) < 0) {
+				//log.error("account error :O");
 				String sql = "call changeBalance(?,?,?)";
 				CallableStatement cs = con.prepareCall(sql);
 				cs.setString(1, username);
 				cs.setDouble(2, bal);
 				cs.setString(3, id);
 				cs.execute();
-			
 				return Optional.of(true);
+			} else {
+				return Optional.of(false);
+			}
 		} catch (SQLException e) {
-			log.error("Database Error");
+			log.error("Database Error" + e);
 			return Optional.of(false);
 		
 		}
