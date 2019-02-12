@@ -45,9 +45,9 @@ public class Bank {
 			switch(mainChoice) {
 				case "1":
 					if(userService.createUser(scan).get())
-						System.out.println("New user has been created.");
+						System.out.println("\nNew user has been created.");
 					else
-						System.out.println("User could not be created.");
+						System.out.println("\nUser could not be created.");
 					break;
 			
 				case "2":
@@ -82,38 +82,43 @@ public class Bank {
 	
 	private static void userMenuChoice(User users, Account accounts, String userChoice, Scanner userScan, 
 									UserService userService, AccountService accountService, Scanner scan) {
-		List<Account> accountList = new ArrayList<Account>();
 		do {
 			userMenu();
 			userChoice = userScan.next();
 		
 			switch(userChoice) {
 				case "1":
-					accountList = accountService.viewAccounts(users, accounts, scan).get();
-					
-					for(Account s: accountList) {
-						System.out.println(s.toString());
-					}
+					accountService.viewAccounts(users, accounts, scan).get();
 					break;
 			
 				case "2":
-					System.out.println("Depositing not implemented");
+					if(accountService.depositInto(accounts, scan).get()) {
+						System.out.println("\nSuccessfully deposited.");
+					} else {
+						System.out.println("\nCould not deposit.");
+					}
 					break;
 					
 				case "3":
-					System.out.println("Withdrawing not implemented");
+					if(accountService.withdrawFrom(accounts, scan).get()) {
+						System.out.println("\nSuccessfully withdrawal.");
+					} else {
+						System.out.println("\nCould not withdraw.");
+					}
 					break;
 					
 				case "4":
 					if (accountService.createAccount(scan, users).get())
-						System.out.println("Account has been created");
+						System.out.println("\nAccount has been created");
 					else
-						System.out.println("Account could not be created");
+						System.out.println("\nAccount could not be created");
 					break;
 					
 				case "5":
 					if(accountService.deleteAccount(scan, users, accounts).get())
 						System.out.println("\nAccount has been deleted.");
+					else
+						System.out.println("\nAccount could not be deleted.");
 					break;
 			case "0":
 					System.out.println("Logging out.\n");
@@ -142,7 +147,7 @@ public class Bank {
 			
 			switch(adminChoice) {
 			case "1":
-				System.out.println("Viewing all users not implemented");
+				userService.viewUsers(users, accounts, scan).get();
 				break;
 		
 			case "2":

@@ -36,11 +36,11 @@ public class AccountService {
 		return accountDao.viewAccounts(user, account, scan);
 	}
 	
-	public Optional<Boolean> depositInto(Account account) {
-		return accountDao.depositInto(account);
+	public Optional<Boolean> depositInto(Account account, Scanner scan) {
+		return accountDao.depositInto(account, scan);
 	}
 	
-	public Optional<Boolean> withdrawFrom(Account account) {
-		return accountDao.withdrawFrom(account);
+	public Optional<Boolean> withdrawFrom(Account account, Scanner scan) {
+		return accountDao.withdrawFrom(account, scan);
 	}
 }

@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 //import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
@@ -67,7 +68,7 @@ public class AccountOracle implements AccountDao {
 			
 			return Optional.of(true);
 		} catch (SQLException e) {
-			log.error("No accounty wounty" + e);
+			log.error("Database Error");
 			return Optional.of(false);
 		
 		}
@@ -82,18 +83,38 @@ public class AccountOracle implements AccountDao {
 		}
 		
 		String username = "", pass = "";
+		Integer id;
+		Double bal;
 		
 		System.out.print("Enter your username: ");
 		username = scan.next();
 		System.out.print("Enter your password: ");
 		pass = scan.next();
+		System.out.print("Enter your account id: ");
+		id = scan.nextInt();
 		
 		try {
+			String sql1 = "call getAccount(?,?,?)";
+			CallableStatement cs1 = con.prepareCall(sql1);
+			cs1.setString(1, username);
+			cs1.setInt(2, id);
+			cs1.registerOutParameter(3, Types.DOUBLE);
+			//log.error("Error deleting " + cs1);
+			cs1.execute();
+			
+			bal = cs1.getDouble(3);
+			
+			account.setBalance(bal);
+			
+			//log.error("Error deleting " + account.getBalance());
+			
 			if(account.getBalance() <= 0.0 || user.getIsAdmin() > 0) {
-				String sql = "call deleteAccount(?,?)";
-				CallableStatement cs = con.prepareCall(sql);
+				String sql2 = "call deleteAccount(?,?,?)";
+				CallableStatement cs = con.prepareCall(sql2);
 				cs.setString(1, username);
 				cs.setString(2, pass);
+				cs.setInt(3, id);
+				//log.error("Error deleting " + cs);
 				cs.execute();
 			
 				return Optional.of(true);
@@ -103,21 +124,81 @@ public class AccountOracle implements AccountDao {
 				
 			}
 		} catch (SQLException e) {
+			log.error("Database Error");
 			return Optional.of(false);
 		
 		}
 	}
 
 	@Override
-	public Optional<Boolean> depositInto(Account account) {
-		// TODO Auto-generated method stub
-		return null;
+	public Optional<Boolean> depositInto(Account account, Scanner scan) {
+		Connection con = ConnectionUtil.getConnection();
+		
+		if(con == null) {
+			return Optional.empty();
+		}
+		
+		String username = "", id = "";
+		Double bal;
+		
+		System.out.print("Enter your username: ");
+		username = scan.next();
+		System.out.print("Enter your account id: ");
+		id = scan.next();
+		System.out.print("Enter amount to deposit: ");
+		bal = scan.nextDouble();
+		
+		try {
+			
+				String sql = "call changeBalance(?,?,?)";
+				CallableStatement cs = con.prepareCall(sql);
+				cs.setString(1, username);
+				cs.setDouble(2, bal);
+				cs.setString(3, id);
+				cs.execute();
+			
+				return Optional.of(true);
+		} catch (SQLException e) {
+			log.error("Database Error");
+			return Optional.of(false);
+		
+		}
 	}
 
 	@Override
-	public Optional<Boolean> withdrawFrom(Account account) {
-		// TODO Auto-generated method stub
-		return null;
+	public Optional<Boolean> withdrawFrom(Account account, Scanner scan) {
+Connection con = ConnectionUtil.getConnection();
+		
+		if(con == null) {
+			return Optional.empty();
+		}
+		
+		String username = "", id = "";
+		Double bal;
+		
+		System.out.print("Enter your username: ");
+		username = scan.next();
+		System.out.print("Enter your account id: ");
+		id = scan.next();
+		System.out.print("Enter amount to withdraw: ");
+		bal = scan.nextDouble();
+		bal = bal * -1;
+		
+		try {
+			
+				String sql = "call changeBalance(?,?,?)";
+				CallableStatement cs = con.prepareCall(sql);
+				cs.setString(1, username);
+				cs.setDouble(2, bal);
+				cs.setString(3, id);
+				cs.execute();
+			
+				return Optional.of(true);
+		} catch (SQLException e) {
+			log.error("Database Error");
+			return Optional.of(false);
+		
+		}
 	}
 
 	@Override
@@ -141,12 +222,13 @@ public class AccountOracle implements AccountDao {
 				account.setAccountType(rs.getString("type_account"));
 				account.setBalance(rs.getDouble("account_bal"));
 				account.setAccountUsername(rs.getString("acc_user"));
+				System.out.println(account.toString());
 				accountList.add(account);
 			}
 			
 			return Optional.of(accountList);
 		} catch (Exception e) {
-			System.out.println("Couldn't fetch accounts.");
+			log.error("Database Error");
 			return Optional.empty();
 		}
 	}

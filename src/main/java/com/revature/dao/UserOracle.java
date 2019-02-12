@@ -2,8 +2,11 @@ package com.revature.dao;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -63,7 +66,7 @@ public class UserOracle implements UserDao {
 			
 			return Optional.of(true);
 		} catch (SQLException e) {
-			log.error("Why you do this?" + e);
+			log.error("Database Error");
 			return Optional.of(false);
 		
 		}
@@ -125,7 +128,7 @@ public class UserOracle implements UserDao {
 			return Optional.empty();
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			log.error("Database Error");
 			return Optional.empty();
 		}
 	}
@@ -154,15 +157,40 @@ public class UserOracle implements UserDao {
 			
 			return Optional.of(true);
 		} catch (SQLException e) {
+			log.error("Database Error");
 			return Optional.of(false);
 		
 		}
 	}
-
+	
 	@Override
 	public Optional<List<User>> viewUsers(User user, Account account, Scanner scan) {
-		// TODO Auto-generated method stub
-		return null;
+		Connection connect = ConnectionUtil.getConnection();
+		
+		if (connect == null) {
+			return Optional.empty();			
+		}
+		try {
+			String sql = "select * from users";
+			PreparedStatement ps = connect.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+
+			//log.error("Error in query");
+			List<User> userList = new ArrayList<User>();
+			while (rs.next()) {
+				//log.error("Error in accounts adding");
+				user.setId(rs.getInt("user_id"));
+				user.setUsername(rs.getString("username"));
+				user.setIsAdmin(rs.getInt("is_admin"));
+				System.out.println(user.toString());
+				userList.add(user);
+			}
+			
+			return Optional.of(userList);
+		} catch (Exception e) {
+			log.error("Database Error");
+			return Optional.empty();
+		}
 	}
 
 }

@@ -127,3 +127,30 @@ ORA-06512: at "MASTER.ADDACCOUNT", line 4
 [ERROR] 2019-02-11 21:01:47.625 [main] AccountOracle - Error in accounts adding
 [ERROR] 2019-02-11 21:01:47.626 [main] AccountOracle - Error in returning
 [ERROR] 2019-02-11 21:01:47.626 [main] AccountOracle - Error in returning
+[ERROR] 2019-02-12 09:20:02.162 [main] AccountOracle - User [id=8, username=t, isAdmin=0]
+[ERROR] 2019-02-12 09:20:02.171 [main] AccountOracle - User [id=9, username=sean, isAdmin=0]
+[ERROR] 2019-02-12 09:20:02.172 [main] AccountOracle - User [id=1, username=root, isAdmin=1]
+[ERROR] 2019-02-12 09:20:02.172 [main] AccountOracle - User [id=5, username=tesch, isAdmin=0]
+[ERROR] 2019-02-12 09:22:51.501 [main] AccountOracle - User [id=8, username=t, isAdmin=0]
+[ERROR] 2019-02-12 09:22:51.517 [main] AccountOracle - User [id=9, username=sean, isAdmin=0]
+[ERROR] 2019-02-12 09:22:51.518 [main] AccountOracle - User [id=1, username=root, isAdmin=1]
+[ERROR] 2019-02-12 09:22:51.518 [main] AccountOracle - User [id=5, username=tesch, isAdmin=0]
+[ERROR] 2019-02-12 09:24:36.295 [main] AccountOracle - User [id=8, username=t, isAdmin=0]
+[ERROR] 2019-02-12 09:24:36.302 [main] AccountOracle - User [id=9, username=sean, isAdmin=0]
+[ERROR] 2019-02-12 09:24:36.302 [main] AccountOracle - User [id=1, username=root, isAdmin=1]
+[ERROR] 2019-02-12 09:24:36.302 [main] AccountOracle - User [id=5, username=tesch, isAdmin=0]
+[ERROR] 2019-02-12 09:52:45.684 [main] AccountOracle - Error deleting java.sql.SQLException: Missing IN or OUT parameter at index:: 1
+[ERROR] 2019-02-12 09:55:02.419 [main] AccountOracle - Error deleting java.sql.SQLException: Missing IN or OUT parameter at index:: 1
+[ERROR] 2019-02-12 09:56:22.096 [main] AccountOracle - Error deleting java.sql.SQLException: Missing IN or OUT parameter at index:: 1
+[ERROR] 2019-02-12 09:56:59.300 [main] AccountOracle - Error deleting java.sql.SQLException: Missing IN or OUT parameter at index:: 1
+[ERROR] 2019-02-12 09:57:53.397 [main] AccountOracle - Error deleting java.sql.SQLException: Missing IN or OUT parameter at index:: 1
+[ERROR] 2019-02-12 09:58:29.772 [main] AccountOracle - Error deleting java.sql.SQLException: Missing IN or OUT parameter at index:: 1
+[ERROR] 2019-02-12 10:00:09.804 [main] AccountOracle - Error deleting select * from accounts where acc_user = ? and account_id = ?
+[ERROR] 2019-02-12 10:00:09.826 [main] AccountOracle - Error deleting java.sql.SQLException: Missing IN or OUT parameter at index:: 1
+[ERROR] 2019-02-12 10:00:53.667 [main] AccountOracle - Error deleting select * from accounts where acc_user = ? and account_id = ?
+[ERROR] 2019-02-12 10:00:53.687 [main] AccountOracle - Error deleting oracle.jdbc.driver.OraclePreparedStatementWrapper@13526e59
+[ERROR] 2019-02-12 10:00:53.689 [main] AccountOracle - Error deleting java.sql.SQLException: Missing IN or OUT parameter at index:: 1
+[ERROR] 2019-02-12 10:09:22.293 [main] AccountOracle - Error deleting java.sql.SQLException: operation not allowed: Ordinal binding and Named binding cannot be combined!
+[ERROR] 2019-02-12 10:11:56.777 [main] AccountOracle - Error deleting oracle.jdbc.driver.OracleCallableStatementWrapper@49c90a9c
+[ERROR] 2019-02-12 10:11:56.832 [main] AccountOracle - Error deleting 0.0
+[ERROR] 2019-02-12 10:11:56.832 [main] AccountOracle - Error deleting oracle.jdbc.driver.OracleCallableStatementWrapper@2235eaab

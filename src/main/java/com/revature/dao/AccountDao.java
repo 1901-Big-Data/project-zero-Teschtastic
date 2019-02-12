@@ -12,7 +12,7 @@ public interface AccountDao {
 	Optional<Boolean> createAccount(Scanner scan, User user);
 	Optional<Boolean> deleteAccount(Scanner scan, User user, Account account);
 	Optional<List<Account>> viewAccounts(User user, Account account, Scanner scan);
-	Optional<Boolean> depositInto(Account account);
-	Optional<Boolean> withdrawFrom(Account account);
+	Optional<Boolean> depositInto(Account account, Scanner scan);
+	Optional<Boolean> withdrawFrom(Account account, Scanner scan);
 
 }
