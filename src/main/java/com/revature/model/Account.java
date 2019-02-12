@@ -106,8 +106,11 @@ public class Account implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Account [balance=" + balance + ", accountID=" + accountID + ", accountType=" + accountType
-				+ ", accountUsername=" + accountUsername + "]";
+		//return "Account [balance=" + balance + ", accountID=" + accountID + ", accountType=" + accountType
+				//+ ", accountUsername=" + accountUsername + "]";
+				
+		return "Account ID: " + accountID + "\t| Account type: " + accountType +
+				" \t|\tAccount balance: $" + balance;
 	}
 	
 }
