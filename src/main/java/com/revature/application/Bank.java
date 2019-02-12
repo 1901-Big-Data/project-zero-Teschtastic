@@ -140,7 +140,7 @@ public class Bank {
 		System.out.println("\nUser Menu\n");
 		System.out.println("1. View all users");
 		System.out.println("2. Create a user");
-		System.out.println("3. Delete user(s)");
+		System.out.println("3. Delete user");
 		System.out.println("0. Log out\n");
 	}
 	
@@ -157,14 +157,14 @@ public class Bank {
 		
 			case "2":
 				if (accountService.createAccount(scan, users).get())
-					System.out.println("Account has been created");
+					System.out.println("\nAccount has been created");
 				else
-					System.out.println("Account could not be created");
+					System.out.println("\nAccount could not be created");
 				break;
 				
 			case "3":
-				if(accountService.deleteAccount(scan, users, accounts).get())
-					System.out.println("\nAccount has been deleted.");
+				if(userService.deleteUser(scan).get())
+					System.out.println("\nUser has been deleted.");
 				break;
 		case "0":
 				System.out.println("Logging out.\n");

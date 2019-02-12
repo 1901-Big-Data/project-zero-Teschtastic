@@ -154,3 +154,8 @@ ORA-06512: at "MASTER.ADDACCOUNT", line 4
 [ERROR] 2019-02-12 10:11:56.777 [main] AccountOracle - Error deleting oracle.jdbc.driver.OracleCallableStatementWrapper@49c90a9c
 [ERROR] 2019-02-12 10:11:56.832 [main] AccountOracle - Error deleting 0.0
 [ERROR] 2019-02-12 10:11:56.832 [main] AccountOracle - Error deleting oracle.jdbc.driver.OracleCallableStatementWrapper@2235eaab
+[ERROR] 2019-02-12 13:38:03.596 [main] UserOracle - Database Error
+[ERROR] 2019-02-12 13:38:29.064 [main] UserOracle - Database Error
+[ERROR] 2019-02-12 13:49:23.197 [main] UserOracle - Database Error
+[ERROR] 2019-02-12 13:50:29.880 [main] UserOracle - Database Errorjava.sql.SQLException: Invalid column name
+[ERROR] 2019-02-12 13:52:16.306 [main] UserOracle - Database Errorjava.sql.SQLException: ResultSet.next was not called

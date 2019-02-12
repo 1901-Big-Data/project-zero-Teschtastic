@@ -142,23 +142,35 @@ public class UserOracle implements UserDao {
 			return Optional.empty();
 		}
 		
-		String username = "", pass = "";
+		String username = "";
+		Integer id, id1;
 		
-		System.out.print("Enter your username: ");
+		System.out.print("Enter the username: ");
 		username = scan.next();
-		System.out.print("Enter your password: ");
-		pass = scan.next();
+		System.out.print("Enter the user ID: ");
+		id = scan.nextInt();
 		
 		try {
-			String sql = "call deleteUser(?,?)";
-			CallableStatement cs = con.prepareCall(sql);
-			cs.setString(1, username);
-			cs.setString(2, pass);
-			cs.execute();
+			String sql1 = "select user_id from users where username = ?";
+			PreparedStatement ps = con.prepareStatement(sql1);
+			ps.setString(1, username);
+			ResultSet rs = ps.executeQuery();
+			rs.next();
+			id1 = rs.getInt("user_id");
 			
-			return Optional.of(true);
+			if(id1.equals(id)) {
+				String sql = "call deleteUser(?,?)";
+				CallableStatement cs = con.prepareCall(sql);
+				cs.setString(1, username);
+				cs.setInt(2, id);
+				cs.execute();
+			
+				return Optional.of(true);
+			} else {
+				return Optional.of(false);
+			}
 		} catch (SQLException e) {
-			log.error("Database Error");
+			log.error("Database Error" + e);
 			return Optional.of(false);
 		
 		}
