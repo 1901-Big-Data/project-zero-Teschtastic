@@ -115,17 +115,18 @@ public class UserOracle implements UserDao {
 			//log.error("last try");
 			try {
 				if (success == 0) {
+					User user = new User(0, "", "", 0);
 					System.out.println("Invalid username / password combination");
+					
+					return Optional.of(user);
 				} else {
 					User user = new User(id, username, "", (admin > 0) ? 1 : 0);
 					
 					return Optional.of(user);
 				}
 			} catch(NoSuchElementException e) {
-				
-				
+				return Optional.empty();
 			}
-			return Optional.empty();
 			
 		} catch (SQLException e) {
 			log.error("Database Error");

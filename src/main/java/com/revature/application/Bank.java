@@ -9,7 +9,8 @@ import com.revature.service.AccountService;
 
 public class Bank {
 	public static void main(String[] args) throws Exception {
-		Scanner mainScan = new Scanner(System.in), userScan = new Scanner(System.in), adminScan = new Scanner(System.in), scan = new Scanner(System.in);
+		Scanner mainScan = new Scanner(System.in), userScan = new Scanner(System.in), 
+				adminScan = new Scanner(System.in), scan = new Scanner(System.in);
 		String mainChoice = "", userChoice = "", adminChoice = "";
 		UserService userService = UserService.getService();
 		AccountService accountService = AccountService.getService();
@@ -18,7 +19,8 @@ public class Bank {
 		
 		System.out.println("Welcome to Revature Banking.");
 		
-		mainMenuChoice(users, accounts, mainChoice, userChoice, adminChoice, mainScan, userScan, adminScan, userService, accountService, scan);
+		mainMenuChoice(users, accounts, mainChoice, userChoice, adminChoice, mainScan, 
+					userScan, adminScan, userService, accountService, scan);
 		
 		mainScan.close();
 		userScan.close();
@@ -35,7 +37,8 @@ public class Bank {
 	}
 	
 	public static void mainMenuChoice(User users, Account accounts, String mainChoice, String userChoice,
-								String adminChoice, Scanner mainScan, Scanner userScan, Scanner adminScan, UserService userService, AccountService accountService,
+								String adminChoice, Scanner mainScan, Scanner userScan, Scanner adminScan, 
+								UserService userService, AccountService accountService,
 								Scanner scan) throws Exception {
 		
 		do {
@@ -52,10 +55,12 @@ public class Bank {
 			
 				case "2":
 					users = userService.login(scan).get();
-					if(users.getIsAdmin() == 0) {
+					if(users.getIsAdmin() == 0 && users.getId() != 0) {
 						userMenuChoice(users, accounts, userChoice, userScan, userService, accountService, scan);
-					} else {
+					} else if(users.getIsAdmin() > 0 && users.getId() != 0) {
 						adminMenuChoice(users, accounts, adminChoice, adminScan, userService, accountService, scan);
+					} else {
+						System.out.println("Could not log in.");
 					}
 					break;
 				
