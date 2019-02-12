@@ -106,7 +106,7 @@ public class Bank {
 					
 				case "3":
 					if(accountService.withdrawFrom(accounts, scan).get()) {
-						System.out.println("\nSuccessfully withdrawal.");
+						System.out.println("\nSuccessful withdrawal.");
 					} else {
 						System.out.println("\nCould not withdraw.");
 					}

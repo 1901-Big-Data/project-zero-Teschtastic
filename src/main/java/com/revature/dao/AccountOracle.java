@@ -200,7 +200,7 @@ Connection con = ConnectionUtil.getConnection();
 			
 
 			//log.error("account error" + bal1);
-			if(Double.compare(bal1, bal) < 0) {
+			if(Double.compare(bal1, bal) > 0) {
 				//log.error("account error :O");
 				String sql = "call changeBalance(?,?,?)";
 				CallableStatement cs = con.prepareCall(sql);
