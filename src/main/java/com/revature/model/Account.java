@@ -103,4 +103,11 @@ public class Account implements Serializable{
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "Account [balance=" + balance + ", accountID=" + accountID + ", accountType=" + accountType
+				+ ", accountUsername=" + accountUsername + "]";
+	}
+	
 }

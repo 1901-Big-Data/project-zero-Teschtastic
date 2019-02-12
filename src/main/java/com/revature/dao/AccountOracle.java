@@ -2,8 +2,12 @@ package com.revature.dao;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Types;
+//import java.sql.Types;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 
@@ -38,6 +42,7 @@ public class AccountOracle implements AccountDao {
 		}
 		
 		String accType, startBal;
+		int id = 0;
 		
 		//do {
 			System.out.print("Enter account type (savings or checking): ");
@@ -57,17 +62,19 @@ public class AccountOracle implements AccountDao {
 			cs.setString(1, user.getUsername());
 			cs.setDouble(2, Double.parseDouble(startBal));
 			cs.setString(3, accType);
+			cs.setInt(4, id);
 			cs.execute();
 			
 			return Optional.of(true);
 		} catch (SQLException e) {
+			log.error("No accounty wounty" + e);
 			return Optional.of(false);
 		
 		}
 	}
 
 	@Override
-	public Optional<Boolean> deleteAccount(Scanner scan, User user) {
+	public Optional<Boolean> deleteAccount(Scanner scan, User user, Account account) {
 		Connection con = ConnectionUtil.getConnection();
 		
 		if(con == null) {
@@ -82,57 +89,21 @@ public class AccountOracle implements AccountDao {
 		pass = scan.next();
 		
 		try {
-		
-			String sql = "call deleteAccount(?,?)";
-			CallableStatement cs = con.prepareCall(sql);
-			cs.setString(1, username);
-			cs.setString(2, pass);
-			cs.execute();
+			if(account.getBalance() <= 0.0 || user.getIsAdmin() > 0) {
+				String sql = "call deleteAccount(?,?)";
+				CallableStatement cs = con.prepareCall(sql);
+				cs.setString(1, username);
+				cs.setString(2, pass);
+				cs.execute();
 			
-			return Optional.of(true);
+				return Optional.of(true);
+			} else {
+				System.out.println("Can't delete account with a non-zero balance.\n");
+				return Optional.of(false);
+				
+			}
 		} catch (SQLException e) {
 			return Optional.of(false);
-		
-		}
-	}
-
-	@Override
-	public Optional<Account> viewAccount(User user, Account account, Scanner scan) {
-		Connection con = ConnectionUtil.getConnection();
-		
-		if(con == null) {
-			return Optional.empty();
-		}
-		
-		String username = "";
-		
-		username = user.getUsername();
-		
-		
-		try {
-
-			//log.error("Trying");
-			String sql = "call viewBalance(?,?,?)";
-			//log.error("Still Trying");
-			CallableStatement cs = con.prepareCall(sql);
-			cs.setString(1, username);
-			cs.registerOutParameter(2, Types.VARCHAR);
-			cs.registerOutParameter(3, Types.DOUBLE);
-			cs.execute();
-			//log.error("continued tries");
-			
-			String type = cs.getString(2);
-			Double bal = cs.getDouble(3);
-			
-			account.setAccountType(type);
-			account.setBalance(bal);
-			account.setAccountUsername(username);
-			//log.error("Last try");
-			
-			return Optional.of(account);
-		} catch (SQLException e) {
-			log.error("Couldn't get balance " + e);
-			return Optional.empty();
 		
 		}
 	}
@@ -149,4 +120,34 @@ public class AccountOracle implements AccountDao {
 		return null;
 	}
 
+	@Override
+	public Optional<List<Account>> viewAccounts(User user, Account account, Scanner acan) {
+		Connection connect = ConnectionUtil.getConnection();
+			
+		if (connect == null) {
+			return Optional.empty();			
+		}
+		try {
+			String sql = "select * from accounts where acc_user = ? order by account_id";
+			PreparedStatement ps = connect.prepareStatement(sql);
+			ps.setString(1, user.getUsername());
+			ResultSet rs = ps.executeQuery();
+
+			//log.error("Error in query");
+			List<Account> accountList = new ArrayList<Account>();
+			while (rs.next()) {
+				//log.error("Error in accounts adding");
+				account.setAccountID(rs.getInt("account_id"));
+				account.setAccountType(rs.getString("type_account"));
+				account.setBalance(rs.getDouble("account_bal"));
+				account.setAccountUsername(rs.getString("acc_user"));
+				accountList.add(account);
+			}
+			
+			return Optional.of(accountList);
+		} catch (Exception e) {
+			System.out.println("Couldn't fetch accounts.");
+			return Optional.empty();
+		}
+	}
 }

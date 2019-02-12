@@ -112,3 +112,18 @@ ORA-06512: at "MASTER.ADDUSER", line 10
 [ERROR] 2019-02-11 13:18:41.121 [main] AccountOracle - Still Trying
 [ERROR] 2019-02-11 13:18:41.171 [main] AccountOracle - continued tries
 [ERROR] 2019-02-11 13:18:41.172 [main] AccountOracle - Last try
+[ERROR] 2019-02-11 13:58:05.067 [main] AccountOracle - No accounty wountyjava.sql.SQLException: Missing IN or OUT parameter at index:: 4
+[ERROR] 2019-02-11 14:01:06.134 [main] AccountOracle - No accounty wountyjava.sql.SQLIntegrityConstraintViolationException: ORA-01400: cannot insert NULL into ("MASTER"."ACCOUNTS"."ACCOUNT_ID")
+ORA-06512: at "MASTER.ADDACCOUNT", line 4
+
+[ERROR] 2019-02-11 20:27:06.472 [main] AccountOracle - No accounty wountyjava.sql.SQLIntegrityConstraintViolationException: ORA-01400: cannot insert NULL into ("MASTER"."ACCOUNTS"."ACCOUNT_ID")
+ORA-06512: at "MASTER.ADDACCOUNT", line 4
+
+[ERROR] 2019-02-11 21:00:20.079 [main] AccountOracle - Error in query
+[ERROR] 2019-02-11 21:00:20.088 [main] AccountOracle - Error in accounts adding
+[ERROR] 2019-02-11 21:01:01.403 [main] AccountOracle - Error in query
+[ERROR] 2019-02-11 21:01:01.414 [main] AccountOracle - Error in accounts adding
+[ERROR] 2019-02-11 21:01:47.619 [main] AccountOracle - Error in query
+[ERROR] 2019-02-11 21:01:47.625 [main] AccountOracle - Error in accounts adding
+[ERROR] 2019-02-11 21:01:47.626 [main] AccountOracle - Error in returning
+[ERROR] 2019-02-11 21:01:47.626 [main] AccountOracle - Error in returning

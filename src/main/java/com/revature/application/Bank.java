@@ -72,7 +72,7 @@ public class Bank {
 	
 	public static void userMenu() {
 		System.out.println("\nUser Menu\n");
-		System.out.println("1. View account balance");
+		System.out.println("1. View accounts");
 		System.out.println("2. Deposit into account");
 		System.out.println("3. Withdraw from account");
 		System.out.println("4. Create account");
@@ -82,15 +82,18 @@ public class Bank {
 	
 	private static void userMenuChoice(User users, Account accounts, String userChoice, Scanner userScan, 
 									UserService userService, AccountService accountService, Scanner scan) {
-		
+		List<Account> accountList = new ArrayList<Account>();
 		do {
 			userMenu();
 			userChoice = userScan.next();
 		
 			switch(userChoice) {
 				case "1":
-					accounts = accountService.viewAccount(users, accounts, scan).get();
-					System.out.println(accounts.getAccountUsername() + "'s balance is: $" + accounts.getBalance());
+					accountList = accountService.viewAccounts(users, accounts, scan).get();
+					
+					for(Account s: accountList) {
+						System.out.println(s.toString());
+					}
 					break;
 			
 				case "2":
@@ -109,7 +112,7 @@ public class Bank {
 					break;
 					
 				case "5":
-					if(accountService.deleteAccount(scan, users).get())
+					if(accountService.deleteAccount(scan, users, accounts).get())
 						System.out.println("\nAccount has been deleted.");
 					break;
 			case "0":
@@ -127,8 +130,7 @@ public class Bank {
 		System.out.println("\nUser Menu\n");
 		System.out.println("1. View all users");
 		System.out.println("2. Create a user");
-		System.out.println("3. Update a user");
-		System.out.println("4. Delete user(s)");
+		System.out.println("3. Delete user(s)");
 		System.out.println("0. Log out\n");
 	}
 	
@@ -144,15 +146,15 @@ public class Bank {
 				break;
 		
 			case "2":
-				System.out.println("Creating users not not implemented");
+				if (accountService.createAccount(scan, users).get())
+					System.out.println("Account has been created");
+				else
+					System.out.println("Account could not be created");
 				break;
 				
 			case "3":
-				System.out.println("Updating users not implemented");
-				break;
-				
-			case "4":
-				System.out.println("Deleting users not implemented");
+				if(accountService.deleteAccount(scan, users, accounts).get())
+					System.out.println("\nAccount has been deleted.");
 				break;
 		case "0":
 				System.out.println("Logging out.\n");

@@ -1,5 +1,6 @@
 package com.revature.service;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 
@@ -27,12 +28,12 @@ public class AccountService {
 		return accountDao.createAccount(scan, user);
 	}
 	
-	public Optional<Boolean> deleteAccount(Scanner scan, User user) {
-		return accountDao.deleteAccount(scan, user);
+	public Optional<Boolean> deleteAccount(Scanner scan, User user, Account account) {
+		return accountDao.deleteAccount(scan, user, account);
 	}
-	
-	public Optional<Account> viewAccount(User user, Account account, Scanner scan) {
-		return accountDao.viewAccount(user, account, scan);
+
+	public Optional<List<Account>> viewAccounts(User user, Account account, Scanner scan) {
+		return accountDao.viewAccounts(user, account, scan);
 	}
 	
 	public Optional<Boolean> depositInto(Account account) {

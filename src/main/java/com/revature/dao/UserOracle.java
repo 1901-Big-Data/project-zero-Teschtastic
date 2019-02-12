@@ -4,6 +4,7 @@ import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Types;
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.Scanner;
@@ -12,6 +13,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.revature.util.ConnectionUtil;
+import com.revature.model.Account;
 import com.revature.model.User;
 
 public class UserOracle implements UserDao {
@@ -144,7 +146,6 @@ public class UserOracle implements UserDao {
 		pass = scan.next();
 		
 		try {
-		
 			String sql = "call deleteUser(?,?)";
 			CallableStatement cs = con.prepareCall(sql);
 			cs.setString(1, username);
@@ -156,6 +157,12 @@ public class UserOracle implements UserDao {
 			return Optional.of(false);
 		
 		}
+	}
+
+	@Override
+	public Optional<List<User>> viewUsers(User user, Account account, Scanner scan) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
