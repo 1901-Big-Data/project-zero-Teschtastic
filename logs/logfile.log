@@ -177,3 +177,11 @@ ORA-06512: at "MASTER.ADDACCOUNT", line 4
 [ERROR] 2019-02-12 21:46:02.979 [main] AccountOracle - Database Errorjava.sql.SQLException: Result set after last row
 [ERROR] 2019-02-12 22:11:14.337 [main] AccountOracle - Database Errorjava.sql.SQLException: Result set after last row
 [ERROR] 2019-02-12 22:11:45.060 [main] AccountOracle - Database Errorjava.sql.SQLException: Result set after last row
+[ERROR] 2019-02-13 09:10:00.382 [main] UserOracle - Database Error
+[ERROR] 2019-02-13 09:27:40.526 [main] UserOracle - Database Error
+[ERROR] 2019-02-13 09:30:51.857 [main] UserOracle - Database Errorjava.sql.SQLIntegrityConstraintViolationException: ORA-02292: integrity constraint (MASTER.ACC_USERNAME) violated - child record found
+ORA-06512: at "MASTER.DELETEUSER", line 4
+
+[ERROR] 2019-02-13 13:33:25.855 [main] UserOracle - Database Errorjava.sql.SQLIntegrityConstraintViolationException: ORA-02292: integrity constraint (MASTER.ACC_USERNAME) violated - child record found
+ORA-06512: at "MASTER.DELETEUSER", line 4
+

@@ -89,7 +89,7 @@ public class AccountOracle implements AccountDao {
 		System.out.print("Enter your username: ");
 		username = scan.next();
 		System.out.print("Enter your password: ");
-		pass = scan.nextLine();
+		pass = scan.next();
 		System.out.print("Enter your account id: ");
 		id = scan.nextInt();
 		
@@ -144,7 +144,7 @@ public class AccountOracle implements AccountDao {
 		System.out.print("Enter your username: ");
 		username = scan.next();
 		System.out.print("Enter your account id: ");
-		id = scan.nextLine();
+		id = scan.next();
 		System.out.print("Enter amount to deposit: ");
 		bal = scan.nextDouble();
 		
