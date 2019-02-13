@@ -30,10 +30,12 @@ public class Bank {
 	}
 	
 	public static void mainMenu() {
+		System.out.println("\n------------------\n");
 		System.out.println("\nMain Menu\n");
 		System.out.println("1. Create new user");
 		System.out.println("2. Log In");
-		System.out.println("0. Exit\n");	
+		System.out.println("0. Exit\n");
+		System.out.println("\n------------------\n");
 	}
 	
 	public static void mainMenuChoice(User users, Account accounts, String mainChoice, String userChoice,
@@ -76,6 +78,7 @@ public class Bank {
 	}
 	
 	public static void userMenu() {
+		System.out.println("\n------------------------\n");
 		System.out.println("\nUser Menu\n");
 		System.out.println("1. View accounts");
 		System.out.println("2. Deposit into account");
@@ -83,6 +86,7 @@ public class Bank {
 		System.out.println("4. Create account");
 		System.out.println("5. Delete account");
 		System.out.println("0. Log out\n");
+		System.out.println("\n------------------------\n");
 	}
 	
 	private static void userMenuChoice(User users, Account accounts, String userChoice, Scanner userScan, 
@@ -137,11 +141,13 @@ public class Bank {
 	}
 	
 	public static void adminMenu() {
+		System.out.println("\n-----------------\n");
 		System.out.println("\nUser Menu\n");
 		System.out.println("1. View all users");
 		System.out.println("2. Create a user");
 		System.out.println("3. Delete user");
 		System.out.println("0. Log out\n");
+		System.out.println("\n-----------------\n");
 	}
 	
 	private static void adminMenuChoice(User users, Account accounts, String adminChoice, Scanner adminScan, 
@@ -156,10 +162,10 @@ public class Bank {
 				break;
 		
 			case "2":
-				if (accountService.createAccount(scan, users).get())
-					System.out.println("\nAccount has been created");
+				if (userService.createUser(scan).get())
+					System.out.println("\nUser has been created");
 				else
-					System.out.println("\nAccount could not be created");
+					System.out.println("\nUser could not be created");
 				break;
 				
 			case "3":
