@@ -185,7 +185,6 @@ Connection con = ConnectionUtil.getConnection();
 		id = scan.next();
 		System.out.print("Enter amount to withdraw: ");
 		bal = scan.nextDouble();
-		bal = bal * -1;
 		
 		try {
 			String sql1 = "select account_bal from accounts where acc_user = ? and account_id = ?";
@@ -200,7 +199,8 @@ Connection con = ConnectionUtil.getConnection();
 			
 
 			//log.error("account error" + bal1);
-			if(Double.compare(bal1, bal) > 0) {
+			if(Double.compare(bal1, bal) > 0.0) {
+				bal = bal * -1;
 				//log.error("account error :O");
 				String sql = "call changeBalance(?,?,?)";
 				CallableStatement cs = con.prepareCall(sql);
