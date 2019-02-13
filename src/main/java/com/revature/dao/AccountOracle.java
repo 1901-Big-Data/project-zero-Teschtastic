@@ -46,9 +46,10 @@ public class AccountOracle implements AccountDao {
 		int id = 0;
 		
 		//do {
-			System.out.print("Enter account type (savings or checking): ");
+			System.out.print("Enter account name: ");
 			accType = scan.next();
 			accType = accType.toLowerCase();
+			//accType = accType.replace(" ", "");
 		//} while(!accType.equals("savings") || !accType.equals("checking"));
 		
 		do {
@@ -57,7 +58,6 @@ public class AccountOracle implements AccountDao {
 		} while(Double.parseDouble(startBal) < 0.0);
 		
 		try {
-			
 			String sql = "call addAccount(?,?,?,?)";
 			CallableStatement cs = con.prepareCall(sql);
 			cs.setString(1, user.getUsername());
@@ -89,7 +89,7 @@ public class AccountOracle implements AccountDao {
 		System.out.print("Enter your username: ");
 		username = scan.next();
 		System.out.print("Enter your password: ");
-		pass = scan.next();
+		pass = scan.nextLine();
 		System.out.print("Enter your account id: ");
 		id = scan.nextInt();
 		
@@ -144,7 +144,7 @@ public class AccountOracle implements AccountDao {
 		System.out.print("Enter your username: ");
 		username = scan.next();
 		System.out.print("Enter your account id: ");
-		id = scan.next();
+		id = scan.nextLine();
 		System.out.print("Enter amount to deposit: ");
 		bal = scan.nextDouble();
 		
@@ -176,13 +176,14 @@ Connection con = ConnectionUtil.getConnection();
 			return Optional.empty();
 		}
 		
-		String username = "", id = "";
+		String username = "";
+		Integer id;
 		Double bal, bal1;
 		
 		System.out.print("Enter your username: ");
 		username = scan.next();
 		System.out.print("Enter your account id: ");
-		id = scan.next();
+		id = scan.nextInt();
 		System.out.print("Enter amount to withdraw: ");
 		bal = scan.nextDouble();
 		
@@ -190,7 +191,7 @@ Connection con = ConnectionUtil.getConnection();
 			String sql1 = "select account_bal from accounts where acc_user = ? and account_id = ?";
 			PreparedStatement ps = con.prepareStatement(sql1);
 			ps.setString(1, username);
-			ps.setInt(2, Integer.parseInt(id));
+			ps.setInt(2, id);
 			ResultSet rs = ps.executeQuery();
 
 			//log.error("sql error");
@@ -206,7 +207,7 @@ Connection con = ConnectionUtil.getConnection();
 				CallableStatement cs = con.prepareCall(sql);
 				cs.setString(1, username);
 				cs.setDouble(2, bal);
-				cs.setString(3, id);
+				cs.setInt(3, id);
 				cs.execute();
 				return Optional.of(true);
 			} else {

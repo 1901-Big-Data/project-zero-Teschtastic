@@ -174,3 +174,6 @@ ORA-06512: at "MASTER.ADDACCOUNT", line 4
 
 [ERROR] 2019-02-12 16:19:59.987 [main] AccountOracle - sql error
 [ERROR] 2019-02-12 16:19:59.997 [main] AccountOracle - account error700.0
+[ERROR] 2019-02-12 21:46:02.979 [main] AccountOracle - Database Errorjava.sql.SQLException: Result set after last row
+[ERROR] 2019-02-12 22:11:14.337 [main] AccountOracle - Database Errorjava.sql.SQLException: Result set after last row
+[ERROR] 2019-02-12 22:11:45.060 [main] AccountOracle - Database Errorjava.sql.SQLException: Result set after last row
